@@ -1,0 +1,117 @@
+
+
+Was bedeutet Objektorientierung (oo)? (speziell mit Hintergedanke wiss. Rechnen, Datenauswertung, Simulation usw.)
+
+
+Lektion 1 (twofuncs_a.py) "Gedächtnis":
+ - func1 und func2 verhalten sich genau gleich, im Unteren Teil wo sie aufgerufen werden
+   macht es überhaupt keinen Unterschied
+ - die Funktion befindet sich jedesmal in einem anderen Zustand, n hat jedesmal einen anderen Wert
+ - als Funktion (func1) --> Zustand wird vergessen, im Nachhinein nicht unbedingt rekonstruierbar
+ - als Methode einer Klasseninstanz --> Zustand wird durch Attribute beschrieben, von aussen
+   kann auf die Attribute zugegriffen werden, über eine Zustandsvariable kann Protokoll geführt
+   werden
+ - mit Pickler und Unpickler kann eine Instanz eingefroren und aufgetaut werden
+   --> Zustand nach Jahren wieder da, ohne re-run, Zustandsvariablen abrufbar, für die man sich vorher
+       nicht so interessiert hatte
+ - ganz nebenbei: der Befehl "x=asfarray(x)" macht die Funktionen extrem tolerant, sie
+   können verdauen: int, float, list, array, .... und alles ziemlich ohne unbeabsichtigte Nebenwirkungen
+
+
+
+Lektion 2 (produce_data.py):
+ - nichts wichtiges, soll nur Daten produzieren für process_data.py
+ - aber ganz nebenbei: func3 verträgt Zahlen oder arrays als argumente, in Python kann man
+   tolerant programmieren
+ - aber ganz nebenbei:
+   a) sowas wie datapath='D:\\workspace_py\\oo_examples\\data'
+   oder datapath='/home/workspace_py/oo_examples/data' ist nicht portabel
+   b) wird portabel wenn man getcwd, join usw. aus os und os.path benutzt
+ - aber ganz nebenbei:
+   try und except erlaubt es, Fehlermeldungen einzuplanen und abzufangen, den Code tolerant und
+   komfortabel zu machen
+
+
+Lektion 3 (process_data.py) "Vergessen":
+ - prozedural, zu Vergleichen mit der oo-Alternative process_data_oo.py
+ - Das Manko: vieles wird bei jedem neuen Schleifendurchgang wieder vergessen.
+   Jedes mal wenn man eine neue Idee hat, was jetzt noch analysiert werden könnte, muss
+   man das ganze Programm umschreiben und nochmal die Einleseroutine laufen lassen.
+ - nebenbei: Nummer n kommt aus dem Dateinamen, nicht aus einer Laufvariable der Schleife
+
+
+Lektion 4 (process_data_oo.py) "Gedächtnis nutzen":
+(ist kommentiert, Lernziele hier also nur in Stichworten)
+ - Die Klasseninstantz behält wissen über alle eingelesenen Datensätze; mit dem erstellten
+   Wissen lassen sich viele Anfragen an den Datensatz später erledigen, ohne dass die 
+ - prozedurale Auswerteskripts lassen einen zu folgendem schlechten Verhalten neigen:
+   an einem über Monate immer länger werdenden Skript wird immer weiter herumgedoktert
+   und -geflickt, es wird immer länger und unübersichtlicher, es hat Blöcke, die durch
+   Kommentarzeichen ausgeschaltet sind, es ist (auch für den Autor nach einiger Zeit) nicht
+   mehr unmittelbar ersichtlich, ob bein Aktivieren oder Deaktivieren solcher Blöcke nicht
+   Fehlermeldungen oder schlimmer unbeabsichtigtes Verhalten entstehen könnte; manchmal
+   wird versucht, dem entgegenzuwirken, indem anstatt Kommentarzeichen if-Abfragen ver-
+   wendet werden, das führt dann meist zu einem Header, der viele Settings enthält, deren
+   Bedeutung, Zusammenhang und Abhängigkeit für einen späteren Leser (inklusive den Autor)
+   nur noch unter Mühen zu erfassen sind. Das alles hemmt die eigene Experimentierfreude
+   und Kreativität.
+ - Der Übergang zu objektorientierter Programmierung besteht, oberflächlich gesehen, oft
+   nur darin, die verschiedenen Abschnitte, Blöcke und Schleifen aus einem solchen prozedu-
+   ralen Skript der Reihe nach in Methoden einer Klasse umzubenennen. Warum sollte man das
+   tun, wenn es mehr Platz erfordert? Der Grund ist Systematisierung und der Hintergedanke
+   ist, dass dies die Denkarbeit erleichtert und verschlankt, man muss als Autor nicht mehr
+   zu jedem Zeitpunkt so viele Details in seinem eigenen proteinbasierten Arbeitsspeicher
+   haben. Methoden können sich gegenseitig aufrufen, oder Abfragen oder über Variablen
+   (self.this_work_already_done_flag) kommunizieren, so dass man mit viel weniger Denk-
+   arbeit sicherstellen kann, dass beim späteren Herumschrauben am Hauptprogramm weniger
+   Fehler passieren mögen.
+ - Das Hauptprogramm wir sehr übersichtlich wenn es nur noch aus einem Konstruktor und
+   wenigen Methodenaufrufen besteht. Im Hauptprogramm stehen sozusagen nur noch die Über-
+   schriften aus den erklärenden Kommentarzeilen des prozeduralen Ausgangsskripts. Vorhin
+   wurde der Plottingteil mit "# hier wird nun der Plot gemacht" eingeleitet, jetzt steht
+   nur noch Auswerter.plot_data() da.
+ - Ergo, Objektorientierung kann also schon dann Sinn machen, wenn man noch gar nicht
+   kapiert hat, wie man am besten für verschiedene Konzeptteile verschiedene interagierende
+   Klassen definieren soll.
+ - Benutzung von Pickle, cPickle oder anderer Routinen zur "object serialization" macht
+   das Schreiben von Routinen zur ASCII-Ausgabe von Analyseergebnissen oft überflüssig
+
+
+Lektion 5 (unpickle_mda.py) "aufgetautes Objekt":
+ - aufgetautes Objekt
+ - alle Datensätze und alle generierten Auswerteinfos vorhanden
+ - einziges Problem: Abwägung nötig, ob Datensätze wirklich Inhalt des eingemachten
+   Objekts sein sollten
+ - Optionen für verschlankten Inhalt des Einmachglases:
+   a) Klassendefinition von MyDataAnalyser so umschreiben, dass gar nie die ganzen Datensätze
+      gespeichert werden.
+   b) self.data=[] vor dem Einmachen
+   c) def pickle_self(self):
+          self.data=[]
+          dann der Rest
+   d) die Methode __getstate__ neu definieren so dass im zurückgegebenen dictionary aller
+      Attribute der Eintrag 'data' herausgelöscht ist; die Pickler.dump()-Routine weiß
+      dann nichts von self.data
+ - Wenn man die Klassendefinition in einer anderen Datei hat, dann wird das eigentliche
+   Arbeitsskript sehr schlank.
+
+
+Lektion 6 (twofuncs_B.py) "magic methods":
+ - wenn obj1 und obj2 zwei Klasseninstanzen sind und obj1+obj2 keinen Fehler produzieren soll,
+   sondern ein sinnvolles drittes Objekt kreiert werden soll, dann muss man
+   def __add__(self,other): definieren
+ - es gibt viele potentiell sinnvolle macig methods
+
+Lektion 7 (twofuncs_C.py) "interagierende Objekte":
+ - man vergleiche mit alter Mythologie: kenne ich deinen Namen, so bekomme ich Macht über dich
+
+Lektion 8 (twofuncs_D.py) "Vererbung":
+ - Vererbung, ein zentraler Gedanke bei objektorientierter Programmierung
+   hier nur ein kleinster Fingerzeig auf dieses Konzept
+ - auch: Vererbung ermöglicht Experimente mit Veränderungen am eigenen Code, ohne
+   dass man immer gleich den alten Kram über Bord werfen oder tausend
+   parallele Versionen von einem Arbeitsskript anlegen muss
+
+
+
+
