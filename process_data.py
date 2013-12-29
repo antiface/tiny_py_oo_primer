@@ -32,4 +32,3 @@ for dataset in fli:
     plt.savefig(join(plotpath,'pic_'+str(n)+'.png'))
     plt.close()  # wichtig, sonst wird in den selben Plot immer mehr reingepackt
 
-

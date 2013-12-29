@@ -71,5 +71,5 @@ for i in range(N):
     shifted1=func1(data)
     shifted2=func2(data)
 
-print 'die Zustandsvariable hatte folgende Werte:'
+print 'die Zustandsvariable hatte folgende Werte: '
 print f2c.memory.m

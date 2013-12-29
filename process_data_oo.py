@@ -157,4 +157,3 @@ output.close()
 # Uebung: Klassendefinition umschreiben, dass eine Instanz nicht einen
 # riesigen Speicher belegt
 # Grundsatzfrage stellt sich immer: Was alles als Instanzattribute mitschleppen?
-

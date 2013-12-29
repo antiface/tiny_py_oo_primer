@@ -58,4 +58,3 @@ plt.ylabel(r'eine griechische Variable $\gamma$')
 plt.suptitle(r'eine Formel, z. B. $\gamma=\sum_{i=0}^N \, x_i$',x=0.5,y=0.992,ha='center',va='top')
 
 plt.show()
-

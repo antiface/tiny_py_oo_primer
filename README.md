@@ -4,23 +4,14 @@ tiny_py_oo_primer
 a tiny object-orientation primer for python
 -------------------------------------------
 
-Often it happens that scientists and engineers happen to become everyday programmers over the course of the years
-even though they never actively planned that - like me. Sometimes this has the negative consequence of an initially
-incredibly ugly programming style, because you just never properly learnt to do it the right way - like me. Only after
-a while one discovers the virtues of well organised program code and starts to try to adapt good habits from those
-code examples where the good style once helped to understand a concept quicker than equally performant code in ugly
-shape.
+This is a tutorial thought as a tiny introduction to the spaces opened by creating useful class definitions in python. It is targeted in particular at practitioners in science and engineering. ComSci pros sometimes tend to explaining key features of object-orientation too abstractly and then adding generic examples where the abstract feature becomes clear, but the usefulness not (so easily for the newbie). Any point made in this tutorial, however, is tried to be put into quickly graspable practical context.
 
-An object-oriented setup and class definitions can be of incredible help of organising code. But often the virtues of
-object-orientation need some time to be grasped even for grown-up scientists. Here I tried my best to come up with the shortest and crispest possible set of python scripts for hinting towards the core advantages available by defining classes of objects.
+The tutorial is tiny, so just those few things are addressed which appeared most important to me (in my momentary level of understanding).
 
-And this is also to all those users of popular commercial tools for scientific data crunching: python is more than a way to write job scripts and macros, it's more than a data analysis suite, it's a real programming language! Here's a glimpse at the freedom given to you by that.
+Sorry to all who don't speak German, the rest of the explanations inside the source code files is still in German.
 
-Greets!
 
-Markus
-
-Content:
+content:
 --------
  - lesson 1 (twofuncs_A.py) -- memory about function state
  - lesson 2 (produce_data.py) -- just making a data set to work with
@@ -31,4 +22,7 @@ Content:
  - lesson 7 (twofuncs_C.py) -- interacting objects, it's all about external access to namespaces
  - lesson 8 (twofuncs_D.py) -- heredity
  
- Sorry to all who don't speak German, the rest of the explanations in the files is in German.
+The purposes of each lesson are outlined in the file lessons.txt.
+
+
+

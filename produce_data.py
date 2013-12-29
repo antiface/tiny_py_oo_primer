@@ -30,4 +30,3 @@ for i in range(N):
     Z = func3(X, Y) + A1*sin(2*pi*w1*X) + A2*sin(2*pi*w2*Y)
     fname='data_case_{}.txt'.format(str(i).zfill(2))
     savetxt(join(datapath,fname),Z)
-

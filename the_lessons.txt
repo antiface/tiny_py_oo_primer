@@ -112,6 +112,6 @@ Lektion 8 (twofuncs_D.py) "Vererbung":
    dass man immer gleich den alten Kram über Bord werfen oder tausend
    parallele Versionen von einem Arbeitsskript anlegen muss
 
-
-
+   
+   
 
